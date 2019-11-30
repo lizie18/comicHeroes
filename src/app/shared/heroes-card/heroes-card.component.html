@@ -1,0 +1,20 @@
+<div class="card-columns">
+	<div class="card heroe-card" *ngFor="let hero of heroes" (click)="heroView(hero.id, page, term)">
+		<img [src]="hero.image.url | noimg" onError="this.src='assets/img/noimg.jpg'" class="card-img-top" alt="heroe img">
+		<div class="card-body">
+			<div class="d-flex justify-content-between align-items-baseline">
+				<h5 class="card-title">{{ hero.name | uppercase}}</h5>
+				<span *ngIf="hero.biography.alignment == 'good'" class="badge badge-success">Hero</span>
+				<span *ngIf="hero.biography.alignment == 'bad'" class="badge badge-warning">Villain</span>
+			</div>
+			<ng-container *ngIf="hero.biography.publisher == 'DC Comics'; else marvel">
+				<img class="mb-2" src="assets/img/dc.png" width="24px" alt="publisher">
+			</ng-container>
+			<ng-template #marvel>
+				<img class="mb-2" src="assets/img/marvel.png" width="40px" alt="publisher">
+			</ng-template>
+			<p class="card-text">Aliases: {{hero.biography.aliases}}</p>
+			<p class="card-text">Relatives: {{hero.connections.relatives}}</p>
+		</div>
+	</div>
+</div>

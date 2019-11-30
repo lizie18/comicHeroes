@@ -1,0 +1,7 @@
+<ng-container *ngIf="loading; else ready">
+	<app-loading></app-loading>
+</ng-container>
+<ng-template #ready>
+	<app-heroes-card [heroes]="heroesServices.heroesFirstList" [page]="'home'"></app-heroes-card>
+</ng-template>
+

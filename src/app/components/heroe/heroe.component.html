@@ -1,0 +1,64 @@
+<ng-container *ngIf="loading; else ready">
+		<app-loading></app-loading>
+	</ng-container>
+<ng-template #ready>
+	<div class="content-column" *ngIf="hero">
+		<div class="p-2 flex-shrink-1">
+			<div class="mb-3 img-width">
+				<img width="100%" [src]="hero.image.url" alt="">
+			</div>
+			<ng-container *ngIf="hero.biography.publisher == 'DC Comics'; else marvel">
+				<div class="mb-2">
+					<img class="mb-2" src="assets/img/dc.png" width="24px" alt="publisher">
+				</div>
+			</ng-container>
+			<ng-template #marvel>
+				<div class="mb-2">
+					<img class="mb-2" src="assets/img/marvel.png" width="40px" alt="publisher">
+				</div>
+			</ng-template>
+			<div class="mb-2">
+				<span *ngIf="hero.biography.alignment == 'good'" class="badge badge-success">Hero</span>
+				<span *ngIf="hero.biography.alignment == 'bad'" class="badge badge-warning">Villain</span>
+				<span *ngIf="hero.biography.alignment == 'neutral'" class="badge badge-info">Neutral</span>
+			</div>
+		</div>
+		<div class="px-3 py-2">
+			<h2 class="title">{{ hero.name | uppercase}}</h2>
+			<div class="p-1">
+				<p><b>Full name: </b>{{hero.biography["full-name"]}}</p>
+				<p><b>Place of birth: </b>{{hero.biography["pla-of-birth"]}}</p>
+				<p><b>First apparition: </b>{{hero.biography["first-appearance"]}}</p>
+				<p><b>Aliases: </b>{{hero.biography.aliases}}</p>
+				<p><b>Group Affiliation: </b>{{hero.connections["group-affiliation"]}}</p>
+				<p><b>Relatives: </b>{{hero.connections.relatives}}</p>
+				<p><b>Powers:</b></p>
+				<span>Power</span>
+				<div class="progress mb-4">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" [attr.aria-valuenow]="hero.powerstats.power" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: hero.powerstats.power + '%'}"></div>
+				</div>
+				<span>Combat</span>
+				<div class="progress mb-4">
+					<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="hero.powerstats.combat" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: hero.powerstats.combat + '%'}"></div>
+				</div>
+				<span>Intelligence</span>
+				<div class="progress mb-4">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [attr.aria-valuenow]="hero.powerstats.intelligence" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: hero.powerstats.intelligence + '%'}"></div>
+				</div>
+				<span>Durability</span>
+				<div class="progress mb-4">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" [attr.aria-valuenow]="hero.powerstats.durability" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: hero.powerstats.durability + '%'}"></div>
+				</div>
+				<span>Speed</span>
+				<div class="progress mb-4">
+					<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="hero.powerstats.speed" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: hero.powerstats.speed + '%'}"></div>
+				</div>
+				<span>Strength</span>
+				<div class="progress mb-4">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" [attr.aria-valuenow]="hero.powerstats.strength" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: hero.powerstats.strength + '%'}"></div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-outline-danger" [routerLink]="['/' + page + '/' + termSearch]">Go Back</button>
+		</div>
+	</div>
+</ng-template>

@@ -1,0 +1,11 @@
+<div class="row mb-5">
+	<div class="col">
+		<input [(ngModel)]="searchTerm" name="searchTerm" type="text" (keyup.enter)="sendTerm()" class="form-control" placeholder="To search press enter...">
+	</div>
+</div>
+<ng-container *ngIf="loading; else ready">
+		<app-loading></app-loading>
+	</ng-container>
+<ng-template #ready>
+	<app-heroes-card [heroes]="heroesService.heroes" [page]="'search'" [term]="searchTerm"></app-heroes-card>
+</ng-template>
