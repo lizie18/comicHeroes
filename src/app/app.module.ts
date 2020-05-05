@@ -2,7 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
+
+import {
+	CdkVirtualScrollViewport,
+	ScrollDispatcher,
+} from "@angular/cdk/scrolling";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,17 +30,19 @@ import { LoadingComponent } from './shared/loading/loading.component';
 		NoimgPipe,
 		SearchComponent,
 		HeroeComponent,
-		LoadingComponent
+		LoadingComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
-		FormsModule
+		FormsModule,
+		ScrollingModule,
 	],
 	providers: [
-		{provide: LocationStrategy, useClass: HashLocationStrategy}
+		ScrollDispatcher,
+		{ provide: LocationStrategy, useClass: HashLocationStrategy },
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

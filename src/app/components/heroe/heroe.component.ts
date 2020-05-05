@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeroesServiceService } from 'src/app/services/heroes-service.service';
+import { Hero } from 'src/app/model/hero.model';
 
 @Component({
 	selector: 'app-heroe',
@@ -8,7 +9,7 @@ import { HeroesServiceService } from 'src/app/services/heroes-service.service';
 	styles: []
 })
 export class HeroeComponent implements OnInit {
-	hero: object;
+	hero: Hero;
 	page: string;
 	termSearch: string;
 	loading = true;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HeroesServiceService } from 'src/app/services/heroes-service.service';
+import { Hero } from 'src/app/model/hero.model';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-search',
@@ -11,18 +13,20 @@ export class SearchComponent implements OnInit {
 	searchTerm: string;
 	loading = false;
 	constructor(
-		private heroesService: HeroesServiceService,
+		public heroesService: HeroesServiceService,
 		private route: Router,
 		private activedRoute: ActivatedRoute
 	) { }
 
 	ngOnInit() {
 		this.searchTerm = '';
-		this.heroesService.heroes = [];
 		this.activedRoute.params.subscribe(
 			params => {
 				if (params.term) {
 					this.searchTerm = params.term;
+					if (this.heroesService.heroesSearched.length > 0) {
+						return;
+					}
 					this.search();
 				}
 			}
@@ -33,18 +37,15 @@ export class SearchComponent implements OnInit {
 		if (this.searchTerm.length === 0) {
 			return;
 		}
-		this.heroesService.heroes = [];
-		this.route.navigate(['search', this.searchTerm]);
+
+		this.heroesService.heroesSearched = [];
+		// this.route.navigate(['search', this.searchTerm]);
 		this.search();
 	}
 
 	search() {
 		this.loading = true;
-		this.heroesService.getHeroes(this.searchTerm).subscribe(
-			heroesList => {
-				this.loading = false;
-			}
-		);
+		this.heroesService.searchHeroes(this.searchTerm).subscribe(() => this.loading = false);
 	}
 
 }

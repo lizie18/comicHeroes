@@ -1,6 +1,6 @@
 <ng-container *ngIf="loading; else ready">
 		<app-loading></app-loading>
-	</ng-container>
+</ng-container>
 <ng-template #ready>
 	<div class="content-column" *ngIf="hero">
 		<div class="p-2 flex-shrink-1">
@@ -23,15 +23,15 @@
 				<span *ngIf="hero.biography.alignment == 'neutral'" class="badge badge-info">Neutral</span>
 			</div>
 		</div>
-		<div class="px-3 py-2">
+		<div class="px-3 py-2 total-width">
 			<h2 class="title">{{ hero.name | uppercase}}</h2>
 			<div class="p-1">
 				<p><b>Full name: </b>{{hero.biography["full-name"]}}</p>
 				<p><b>Place of birth: </b>{{hero.biography["pla-of-birth"]}}</p>
 				<p><b>First apparition: </b>{{hero.biography["first-appearance"]}}</p>
 				<p><b>Aliases: </b>{{hero.biography.aliases}}</p>
-				<p><b>Group Affiliation: </b>{{hero.connections["group-affiliation"]}}</p>
-				<p><b>Relatives: </b>{{hero.connections.relatives}}</p>
+				<!-- <p><b>Group Affiliation: </b>{{hero.connections["group-affiliation"]}}</p>
+				<p><b>Relatives: </b>{{hero.connections.relatives}}</p> -->
 				<p><b>Powers:</b></p>
 				<span>Power</span>
 				<div class="progress mb-4">
